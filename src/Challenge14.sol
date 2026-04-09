@@ -35,6 +35,7 @@ contract Challenge14 {
 
     mapping(address => mapping(address => uint256)) public allowance;
 
+    // TODO JIN: no public mint function and no minting at construction
     constructor(string memory _name, string memory _symbol, uint8 _decimals) {
         name = _name;
         symbol = _symbol;
@@ -64,7 +65,8 @@ contract Challenge14 {
     function transferFrom(address from, address to, uint256 amount) public virtual returns (bool) {
         uint256 allowed = allowance[from][msg.sender];
 
-        if (allowed == type(uint256).max) allowance[from][msg.sender] = allowed - amount;
+        // TODO JIN: should be allowed !=
+        if (allowed != type(uint256).max) allowance[from][msg.sender] = allowed - amount;
 
         balanceOf[from] -= amount;
 
