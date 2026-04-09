@@ -59,7 +59,8 @@ contract Challenge12 {
 
     function gift(address to, uint256 amount) public onlyOwner {
         balanceOf[to] += amount;
-
+        // TODO JIN - should increase totalSupply if it's basically a mint
+        totalSupply += amount;
         emit Transfer(address(0), to, amount);
     }
 
