@@ -74,6 +74,7 @@ contract Challenge06 {
         return true;
     }
 
+    // TODO JIN: this doesn't protect from the `from` address being on the blacklist
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
         require(!blacklist[msg.sender] && !blacklist[to], "Sender or receiver blacklisted");
         _spendAllowance(from, msg.sender, value);
