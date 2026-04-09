@@ -41,7 +41,8 @@ contract Challenge13 {
     }
 
     function approve(address spender, uint256 amount) public virtual returns (bool) {
-        allowance[spender][msg.sender] = amount;
+        // TODO JIN - should be [msg.sender][spender];
+        allowance[msg.sender][spender] = amount;
 
         emit Approval(msg.sender, spender, amount);
 
@@ -76,6 +77,7 @@ contract Challenge13 {
         return true;
     }
 
+    // TODO JIN: no public way to mint and nothing is minted at construction
     function _mint(address to, uint256 amount) internal virtual {
         totalSupply += amount;
 
