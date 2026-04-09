@@ -82,8 +82,11 @@ contract Challenge08 {
         return true;
     }
 
+    // TODO JIN - needs to update totalSupply - if msg.sender doesn't have enough value this will revert
     function burn(uint256 value) public {
         _balances[msg.sender] -= value;
+        _totalSupply -= value;
+
         emit Transfer(msg.sender, address(0), value);
     }
 
