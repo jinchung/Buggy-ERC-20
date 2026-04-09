@@ -57,10 +57,11 @@ contract Challenge09 {
         return true;
     }
 
+    // TODO JIN - the unchecked will not revert, which means it can underflow
+    // this doesn't require the msg.sender to have sufficient balance in the transfer
+    // and can arbitrarily update their balance
     function transfer(address to, uint256 amount) public returns (bool) {
-        unchecked {
-            _balances[msg.sender] -= amount;
-        }
+        _balances[msg.sender] -= amount;
         _balances[to] += amount;
         emit Transfer(msg.sender, to, amount);
         return true;
@@ -76,7 +77,6 @@ contract Challenge09 {
         uint256 fromBalance = _balances[from];
         require(fromBalance >= amount, "ERC20: insufficient balance");
         _balances[from] = fromBalance - amount;
-
         _balances[to] += amount;
         emit Transfer(from, to, amount);
         return true;
@@ -90,7 +90,6 @@ contract Challenge09 {
 
     function _burn(address from, uint256 amount) internal virtual {
         _balances[from] -= amount;
-
         unchecked {
             _totalSupply -= amount;
         }
