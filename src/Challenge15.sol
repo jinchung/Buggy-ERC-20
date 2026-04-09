@@ -79,6 +79,9 @@ contract Challenge15 {
 
     function _mint(address to, uint256 amount) internal virtual {
         totalSupply += amount;
+        // TODO JIN: this internal function isn't used anywhere, but it is also incomplete
+        // address to does not receive any tokens
+        balanceOf[to] += amount;
 
         emit Transfer(address(0), to, amount);
     }
