@@ -90,7 +90,8 @@ contract Challenge07 {
         return true;
     }
 
-    function mint(address to, uint256 value) public {
+    // TODO JIN: missing onlyOwner on this public mint function
+    function mint(address to, uint256 value) public onlyOwner {
         _mint(to, value);
     }
 
