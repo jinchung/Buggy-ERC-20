@@ -140,9 +140,8 @@ contract Challenge10 {
         require(account != address(0), "ERC20: mint to the zero address");
 
         _totalSupply += amount;
-        unchecked {
-            _balances[account] += amount;
-        }
+        // TODO JIN - with unchecked, this can lead to overflow
+        _balances[account] += amount;
         emit Transfer(address(0), account, amount);
     }
 
