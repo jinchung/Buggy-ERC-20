@@ -59,6 +59,7 @@ contract Challenge05 {
 
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
         _spendAllowance(from, msg.sender, value);
+        // TODO JIN - bug: should be from, to not to, from
         _transfer(to, from, value);
         return true;
     }   
