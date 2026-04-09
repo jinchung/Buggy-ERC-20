@@ -73,10 +73,12 @@ contract Challenge11 {
     }
 
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
+        // TODO JIN - doing the transfer before the allowance check is weird but technically still guarded by the allowance check requirement later
         _transfer(from, to, value);
         uint256 currentAllowance = _allowances[from][msg.sender];
         require(currentAllowance >= value, "Insufficient allowance");
-        _allowances[msg.sender][from] = currentAllowance - value;
+        // TODO JIN - should be [from][msg.sender]
+        _allowances[from][msg.sender] = currentAllowance - value;
         return true;
     }
 
