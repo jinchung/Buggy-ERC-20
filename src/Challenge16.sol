@@ -68,7 +68,9 @@ contract Challenge16 {
     }
 
     function approve(address spender, uint256 value) public returns (bool) {
-        emit Approval(msg.sender, spender, value);
+        // TODO JIN: missing actual update to allowances
+        // removing the emit to Approval as it is handled in _approve
+        _approve(msg.sender, spender, value);
         return true;
     }
 
