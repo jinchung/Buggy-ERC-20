@@ -39,6 +39,9 @@ contract Challenge02 {
         decimals = _decimals;
     }
 
+    // TODO JIN: bug: approve function signature should just be spender and amount
+    // this allows anyone to specify the owner and not check it against msg.sender
+    // also this doesn't follow the spec and return a bool
     function approve(address owner, address spender, uint256 amount) public {
         allowance[owner][spender] = amount;
         emit Approval(owner, spender, amount);
@@ -59,6 +62,7 @@ contract Challenge02 {
     function transferFrom(address from, address to, uint256 amount) public virtual returns (bool) {
         uint256 allowed = allowance[from][msg.sender];
 
+        // TODO JIN: bug: this does not actually check that the spender has the allowance required
         if (allowed != type(uint256).max) allowance[from][msg.sender] = allowed - amount;
 
         balanceOf[from] -= amount;
