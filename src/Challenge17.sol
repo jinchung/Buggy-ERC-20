@@ -92,12 +92,13 @@ contract Challenge17 {
         return true;
     }
 
-       function _transfer(address from, address to, uint256 value) internal {
+     function _transfer(address from, address to, uint256 value) internal {
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
 
-        uint256 toBalance = _balances[to];
-        require(toBalance >= value, "ERC20: transfer amount exceeds balance");
+        // TODO JIN: the check should be that the from has sufficient balance
+        uint256 fromBalance = _balances[from];
+        require(fromBalance >= value, "ERC20: transfer amount exceeds balance");
 
         _balances[from] = toBalance - value;
         _balances[to] += value;
