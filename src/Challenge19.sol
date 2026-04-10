@@ -91,11 +91,12 @@ contract Challenge19 {
         return true;
     }
 
+    // TODO JIN: only thing I can see is that this uses the virtual modifier which seems like a bad idea
     function _transfer(
           address from,
           address to,
           uint256 amount
-    ) internal virtual {
+    ) internal {
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
     
